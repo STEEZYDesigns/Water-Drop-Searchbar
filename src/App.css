@@ -19,22 +19,59 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 } */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+form {
+  height: 100%;
+  width: 100%;
+}
 
 .searchbarContainer {
-  margin-top: 150px;
-  height: 600px;
+  margin-top: 5%;
+  height: 420px;
   width: 100%;
-  color:midnightblue;
-  align-items: center;
-  justify-items: center;
 }
 
 .searchbarComponent {
   height: 100%;
   width: 100%;
-  color:midnightblue;
+  background-color:#d4f1f9 ;
+}
+
+.SearchBar-Animation {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 80%;
+  width: 100%;
+  /* background-color: midnightblue; */
   align-items: center;
-  justify-items: center;
+  justify-content: center;
+}
+
+input [type=submit] {
+  width: 100%;
+}
+
+.waterdropSubmit {
+  width: 100%;
+  border: none;
+  height: 50px;
+  outline: none;
+
+  /* Now below we give the submit button an animation for onClick */
+}
+
+.SubmitField {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 20%;
+  width: 100%;
+  background-color:steelblue;
+  align-items: center;
+  justify-content: center;
 }
 
 .App-logo {
