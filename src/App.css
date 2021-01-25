@@ -55,14 +55,15 @@ input [type=submit] {
   width: 100%;
 }
 
-.waterdropSubmit {
+/* .SubmitFieldOpen {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 20%;
   width: 100%;
-  border: none;
-  height: 50px;
-  outline: none;
-
-  /* Now below we give the submit button an animation for onClick */
-}
+  background-color:steelblue;
+  align-items: center;
+  justify-content: center;
+} */
 
 .SubmitField {
   display: flex;
@@ -72,6 +73,27 @@ input [type=submit] {
   background-color:steelblue;
   align-items: center;
   justify-content: center;
+
+  transition: height 1s, display 2s;
+  /* Now below we give the submit button an animation for onClick */
+  /* animation: SubmitField linear 0.5s normal;   */
+  /*this will be set when the submit button is clicked */
+}
+
+
+
+/* this can stay because we need the animation to run once set */
+@keyframes SubmitField {
+  from { transform: scaleY(1.0); }
+  to { transform: scaleY(0.0); }
+}
+
+.waterdropSubmit {
+  width: 100%;
+  border: none;
+  height: 50px;
+  outline: none;
+  /* transition: display 2s; */
 }
 
 .App-logo {
