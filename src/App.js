@@ -25,8 +25,15 @@ class SearchBar extends Component {
 
   handleAnimations(target) {
     // const target = target; //take the button
-    const submitField = target.parentElement; //take the div to collapse
-    animations.dissapear(target, submitField); //gibu anime-shon
+    const submitField = target.parentElement; //take the div to collapse. SubmitField
+    animations.collapseSubmit(target, submitField); //gibu anime-shon
+
+
+
+    //begin the animation of waterdrop
+    const Parent = submitField.parentElement; //searchbarComponent
+    animations.startWaterDrop(Parent);
+
   }
 
   handleChange(event) {    
@@ -36,13 +43,12 @@ class SearchBar extends Component {
   }
 
   handleSubmit(event) {
+    console.log('A search was submitted: Hooray. I hope this component works soon :)');
+
     this.handleAnimations(event.target);
 
-    console.log('A search was submitted: Hooray. I hope this component works soon :)');
-    //when we click "Search", we want a concise search query
-    this.setSearchValue();
-    //below we can provide the animation to close out the submit button.
-    
+    this.setSearchValue(); //when we click "Search", we want a concise search query
+
     event.preventDefault(); //look up what this does
   }
 
@@ -64,18 +70,31 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <div className="searchbarContainer">
-        <div className="searchbarComponent">
-          <form onSubmit={this.handleSubmit}>
-            <div className="SearchBar-Animation">
-              <input type="text" name="waterdropSearchBar" onChange={this.handleChange} 
-                autoComplete="" placeholder="Water Drop Search Bar by Joe Morales" value={this.state.value} />
+      <div className="SearchBar">
+        <div className="HeadyHead">
+          <a href="/">
+            <img src="./PressHereLogo.jpg" className="MyLogo" alt="MyLogo" />
+          </a>
+        </div>
+          {/* below is the actual searchbar and animated divs */}
+          <div className="searchbarContainer">
+            <div className="searchbarComponent">
+                <div className="SearchBar-Animation">
+                  <div className="waterdrop_searchbar">
+                    <input type="text" name="waterdropSearchBar" onChange={this.handleChange} 
+                      autoComplete="" placeholder="Water Drop Search Bar by Joe Morales" value={this.state.value} />
+                  </div>
+                </div>
+                <div className="SubmitField" >
+                  <button className="waterdropSubmit" onClick={this.handleSubmit} value="Search"> Begin Search </button>
+                </div>
+              <img src={logo} className="App-logo" alt="logo" />
+              <span> contact me @ <a href="https://www.linkedin.com/in/joe-morales-gonzalez-03608116a/"> LinkedIn </a> </span>
             </div>
-            <div className="SubmitField" >
-              <button className="waterdropSubmit" onClick={this.handleSubmit} value="Search"> Begin Search </button>
-            </div>
-          </form>
-          <img src={logo} className="App-logo" alt="logo" />
+          </div>
+        {/* End the searchbar and animated divs */}
+        <div className="CrustyFoot">
+          <img src="./waterdrop.jpg" />
         </div>
       </div>
     )
