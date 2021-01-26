@@ -18,15 +18,14 @@ export const animations = {
     },
 
     startWaterDrop(Parent) { //searchbarComponent
-        const parentBody = Parent.children; //array of children. 
+        const parentBody_array = Parent.children; //array of children. 
+        const searchbar_animation_array = parentBody_array[0].children; //array
+        const CollapseDivSearchbar = searchbar_animation_array[0]; //waterdrop_searchbar
+        const searchbartemp = CollapseDivSearchbar.children; //array
 
-        // console.log(parentBody);
-        // parentBody[0].style = "display:none";
-        const searchbar_animation = parentBody[0].children; //array
-        const SB_Animation = parentBody[0]; //SearchBar-Animation
-        const CollapseDivSearchbar = searchbar_animation[0]; //waterdrop_searchbar
-        const searchbartemp = CollapseDivSearchbar.children;
+        const SB_Animation = parentBody_array[0]; //SearchBar-Animation
         const searchbar = searchbartemp[0];
+
         console.log("test");
         console.log(searchbar);
 
@@ -48,20 +47,34 @@ export const animations = {
         setTimeout(function() { //Start the timer
             searchbar.style = "display: none;";
             // CollapseDivSearchbar.style = "display: none;"
-        }, 4000)
+        }, 3000)
 
         //make the waterdrop appear
         setTimeout(function() {
             const newWaterDrop = document.createElement("img");
             newWaterDrop.className = "WaterDroplet";
-            newWaterDrop.src = "./waterdrop.jpg";
+            newWaterDrop.src = "./waterdropcutout.png";
+
+            // console.log("test, should append waterdrop");
     
             SB_Animation.appendChild(newWaterDrop);
-        }, 4100)
+        }, 3100)
+
+
 
         setTimeout(function() {
-            
-        })
+            // console.log("test");
+            // console.log(SB_Animation);
+            const waterdropletHTML = SB_Animation.children[1];
+
+            console.log(waterdropletHTML);
+
+            waterdropletHTML.style = `
+                height: 200px;
+                width: 150px;
+            `
+
+        }, 3200)
         
     },
 
