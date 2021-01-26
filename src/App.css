@@ -60,6 +60,8 @@ span {
   position: relative;
   height: 0px;
   width: 0px;
+
+  transition: height 2s 0s, width 3s 0.4s;
 }
 
 .waterdrop_searchbar {
