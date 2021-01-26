@@ -73,7 +73,7 @@ class SearchBar extends Component {
       <div className="SearchBar">
         <div className="HeadyHead">
           <a href="/">
-            <img src="./PressHereLogo.jpg" className="MyLogo" alt="MyLogo" />
+            <img src="./PressHerecutout.png" className="MyLogo" alt="MyLogo" />
           </a>
         </div>
           {/* below is the actual searchbar and animated divs */}
@@ -94,7 +94,7 @@ class SearchBar extends Component {
           </div>
         {/* End the searchbar and animated divs */}
         <div className="CrustyFoot">
-          <img src="./waterdrop.jpg" />
+          {/* <img src="./waterdrop.jpg" /> */}
         </div>
       </div>
     )
