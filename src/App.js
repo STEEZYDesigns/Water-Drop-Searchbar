@@ -23,17 +23,17 @@ class SearchBar extends Component {
     this.setSearchValue = this.setSearchValue.bind(this);
   }
 
-  handleAnimations(target) {
+  handleAnimationsSetup(target) {
     // const target = target; //take the button
     const submitField = target.parentElement; //take the div to collapse. SubmitField
     animations.collapseSubmit(target, submitField); //gibu anime-shon
-
-
 
     //begin the animation of waterdrop
     const Parent = submitField.parentElement; //searchbarComponent
     animations.startWaterDrop(Parent);
 
+    // console.log("test, should now go to handle waterdrop animation");
+    this.handleWaterdropAnimation(Parent);
   }
 
   handleChange(event) {    
@@ -42,14 +42,20 @@ class SearchBar extends Component {
     this.setState({value: value});  
   }
 
-  handleSubmit(event) {
+  handleSubmit(event) { 
+    //event is fired from the button @ waterdropSubmit. Child of SubmitField. Child of Searchbar-Animation
     console.log('A search was submitted: Hooray. I hope this component works soon :)');
 
-    this.handleAnimations(event.target);
+    this.handleAnimationsSetup(event.target); //button waterdropSubmit
 
     this.setSearchValue(); //when we click "Search", we want a concise search query
 
     event.preventDefault(); //look up what this does
+  }
+
+  handleWaterdropAnimation(target) { 
+    // console.log(target); //searchbar_component
+    animations.makeWaterdrop(target);
   }
 
   replaceSubmission(event) {
@@ -84,6 +90,7 @@ class SearchBar extends Component {
                     <input type="text" name="waterdropSearchBar" onChange={this.handleChange} 
                       autoComplete="" placeholder="Water Drop Search Bar by Joe Morales" value={this.state.value} />
                   </div>
+                  {/* <div className="disappearingAct" ></div> */}
                 </div>
                 <div className="SubmitField" >
                   <button className="waterdropSubmit" onClick={this.handleSubmit} value="Search"> Begin Search </button>
@@ -96,6 +103,16 @@ class SearchBar extends Component {
         <div className="CrustyFoot">
           {/* <img src="./waterdrop.jpg" /> */}
         </div>
+
+        {/*the following works. 
+         <svg className="svgWaterDroplet" height="50" width="50">
+        <path fill="lime" stroke="#000" stroke-width="1.5"
+              d="M15 3
+                Q16.5 6.8 25 18
+                A12.8 12.8 0 1 1 5 18
+                Q13.5 6.8 15 3z" />
+        Sorry, your browser does not support inline SVG.
+        </svg> */}
       </div>
     )
   }
