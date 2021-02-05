@@ -15,70 +15,112 @@ export const animations = {
         `;
         // console.log(target.parentElement);
 
+        setTimeout(function() {
+            SubmitField.style = "display: none"
+        }, 1000);
+
     },
 
-    startWaterDrop(Parent) { //searchbarComponent
-        const parentBody_array = Parent.children; //array of children. 
-        const searchbar_animation_array = parentBody_array[0].children; //array
-        const CollapseDivSearchbar = searchbar_animation_array[0]; //waterdrop_searchbar
-        const searchbartemp = CollapseDivSearchbar.children; //array
+    startWaterDrop(searchbar_component) {                               //searchbarComponent
+        const sb_component_children = searchbar_component.children;        //array of children. 
+        const searchbar_animation_children = sb_component_children[0].children; //array
+        const CollapseDivSearchbar = searchbar_animation_children[0];      //waterdrop_searchbar
+        const searchbar_children = CollapseDivSearchbar.children;          //array
 
-        const SB_Animation = parentBody_array[0]; //SearchBar-Animation
-        const searchbar = searchbartemp[0];
+        const SB_Animation = sb_component_children[0];                        //SearchBar-Animation
+        const searchbar = searchbar_children[0];                         //searchbar input
 
-        console.log("test");
-        console.log(searchbar);
+        // console.log("test"); //console.log(searchbar);
 
-
+        //I added this accidentally when wondering how to make the CollpaseDivSearchbar actually fadeout
+        //apparently the children? have to also change their visibility transition already set in CSS, can be set here too
         searchbar.style = `
-            visibility: hidden;
-        `
-    
+            visibility: hidden;                                          
+        `     
+
+        //this will allow the searchbar to disappear in an animated manner
         CollapseDivSearchbar.style = `
             width: 0px;
             visibility: hidden;
             opacity: 0;
-            transition: visibility 0s 1.5s, opacity 3s linear, width 2s;
+            transition: visibility 0s 1.5s, opacity 2s linear, width 2s;
         `;
-        // width: 0px;
-        // transition: width 
 
-        //make the searchbar unusable
+        //make the searchbar unusable, display: none
         setTimeout(function() { //Start the timer
             searchbar.style = "display: none;";
             // CollapseDivSearchbar.style = "display: none;"
-        }, 3000)
+            CollapseDivSearchbar.style = "display:none";
 
-        //make the waterdrop appear
+            //remove from the DOM 
+            searchbar.remove();
+            CollapseDivSearchbar.remove();
+
+        }, 2000)
+        // console.log(SB_Animation);
+        // console.log(searchbar);
+        //removing the dom makes the img unable to be rendered
+
+
+        //make the waterdrop image append to the SB_Animation DOM ref
         setTimeout(function() {
             const newWaterDrop = document.createElement("img");
             newWaterDrop.className = "WaterDroplet";
             newWaterDrop.src = "./waterdropcutout.png";
-
-            // console.log("test, should append waterdrop");
     
             SB_Animation.appendChild(newWaterDrop);
-        }, 3100)
-
-
-
-        setTimeout(function() {
-            // console.log("test");
-            // console.log(SB_Animation);
-            const waterdropletHTML = SB_Animation.children[1];
-
-            console.log(waterdropletHTML);
-
-            waterdropletHTML.style = `
-                height: 200px;
-                width: 150px;
-            `
-
-        }, 3200)
+        }, 2800)
         
     },
 
-    test: "test string of animations objects, supposed to hold animation functions "
+    makeWaterdrop(searchbar_component) {
+        // console.log(searchbar_component); // searchbar_component 
+        const searchbar_component_children = searchbar_component.children;
+        const Searchbar_Animation = searchbar_component_children[0]; //searchbar-animation
+        const searchbar_animation_children = Searchbar_Animation.children; 
+        // console.log(searchbar_animation_children);
+
+        setTimeout(function() {
+            //console.log("makeWaterdrop");
+            //console.log(searchbar_animation_children);
+            const theDropletImg = searchbar_animation_children[0];
+
+            theDropletImg.style = `
+                height: 100px;
+                width: 50px;
+                transform: translateY(300px); 
+            `; //450px right now seems to be a good spot to start ripples.
+        }, 3500)
+
+        setTimeout(function() {
+            animations.createRipple(Searchbar_Animation);
+        }, 6400);
+    },
+
+    createRipple(Searchbar_Animation) {
+        // const button = event.currentTarget;
+      
+        const circle = document.createElement("span");
+        const diameter = Math.max(Searchbar_Animation.clientWidth, Searchbar_Animation.clientHeight);
+        const radius = diameter / 2;
+
+        circle.style.bottom = 0;
+      
+        circle.style.width = circle.style.height = `${diameter}px`;
+        circle.style.left = `${Searchbar_Animation.clientX - Searchbar_Animation.offsetLeft - radius}px`;
+        circle.style.top = `${Searchbar_Animation.clientY - Searchbar_Animation.offsetTop - radius}px`;
+        circle.classList.add("ripple");
+      
+        const ripple = Searchbar_Animation.getElementsByClassName("ripple")[0];
+      
+        if (ripple) {
+          ripple.remove();
+        }
+      
+        Searchbar_Animation.appendChild(circle);
+    },
+
+    test: "test string belonging to animations object, supposed to hold animation functions "
 }
 
 
@@ -149,3 +191,18 @@ export default collapseSubmitDiv;
     // submitField.style = "display: none";
     //transition and onclick?
 */
+
+
+//make the waterdroplet expand .... done by makeWaterdrop?
+        // setTimeout(function() {
+        //     // console.log("test"); console.log(SB_Animation);
+        //     const waterdropletHTML = SB_Animation.children[0];
+
+        //     // console.log(waterdropletHTML);
+
+        //     waterdropletHTML.style = `
+        //         height: 100px;
+        //         width: 50px;
+        //     `
+
+        // }, 2900)
